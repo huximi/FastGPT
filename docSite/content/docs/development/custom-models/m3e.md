@@ -23,6 +23,34 @@ FastGPT 默认使用了 openai 的 embedding 向量模型，如果你想私有�
 默认值：sk-aaabbbcccdddeeefffggghhhiiijjjkkk
 也可以通过环境变量引入：sk-key。有关docker环境变量引入的方法请自寻教程，此处不再赘述。
 ```
+```
+mkdir m3e
+cd m3e
+vi docker-compose.yml
+
+version: '3.3'
+services:
+  m3e:
+    container_name: m3e
+    image: registry.cn-hangzhou.aliyuncs.com/fastgpt_docker/m3e-large-api:latest
+    ports:
+      - "6008:6008"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+```
+```
+# 拉取镜像
+sudo docker-compose pull
+# 启动
+sudo docker-compose up -d
+# 关闭
+sudo docker-compose down
+```
 
 ## 接入 One API
 
